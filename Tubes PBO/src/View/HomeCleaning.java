@@ -26,7 +26,7 @@ import javax.swing.WindowConstants;
  */
 public class HomeCleaning{
     JFrame frame;
-    JLabel labelPaket, labelRegular, labelTanggal, labelJam;
+    JLabel labelPaket, labelRegular, labelTanggal, labelJam,labelbasabasi;
     JButton buttonPesan, buttonPaket1, buttonPaket2, buttonPaket3, buttonBack, buttonLogout;
     JTextField tfRegular;
     
@@ -42,6 +42,8 @@ public class HomeCleaning{
         labelRegular = new JLabel("Regular");
         labelRegular.setBounds(50, 60, 100, 30);
         labelRegular.setFont(new Font(labelRegular.getFont().getName(), labelRegular.getFont().getStyle(), 18));
+        labelbasabasi = new JLabel("Banyak ruangan = ");
+        labelbasabasi.setBounds(50, 100, 150, 60);
         labelTanggal = new JLabel(getTanggal());
         labelTanggal.setBounds(5, 10, 100, 30);
         labelTanggal.setFont(new Font(labelTanggal.getFont().getName(), labelTanggal.getFont().getStyle(), 18));
@@ -50,7 +52,7 @@ public class HomeCleaning{
         labelJam.setFont(new Font(labelJam.getFont().getName(), labelJam.getFont().getStyle(), 18));
         
         tfRegular = new JTextField();
-        tfRegular.setBounds(50, 120, 100, 20);
+        tfRegular.setBounds(50, 150, 100, 20);
         buttonPesan = new JButton("Pesan");
         buttonPesan.setBounds(58, 200, 80, 20);
         buttonPesan.addActionListener(new ActionListener(){
@@ -155,6 +157,7 @@ public class HomeCleaning{
         });
         Garis garis = new Garis();
         
+        frame.add(labelbasabasi);
         frame.add(buttonPesan);
         frame.add(buttonPaket1);
         frame.add(buttonPaket2);

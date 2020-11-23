@@ -55,7 +55,7 @@ public class MainMenu extends JFrame implements ActionListener{
                 frame.setVisible(false);
                 new MenuDaftar();
                 break;
-            case "EXIT": 
+            case "Exit": 
                 System.exit(0);
                 break;
         }

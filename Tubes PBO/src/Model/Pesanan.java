@@ -18,6 +18,9 @@ public class Pesanan {
     private int jumlah;
     private int diskon;
     private int totalHarga;
+    private String status;
+    private String namaPemesan;
+    private int idorder;
     
     public int getDiskon() {
         return diskon;
@@ -80,6 +83,30 @@ public class Pesanan {
 
     public void setTotalHarga(int totalHarga) {
         this.totalHarga = totalHarga;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getNamaPemesan() {
+        return namaPemesan;
+    }
+
+    public void setNamaPemesan(String namaPemesan) {
+        this.namaPemesan = namaPemesan;
+    }
+
+    public int getIdorder() {
+        return idorder;
+    }
+
+    public void setIdorder(int idorder) {
+        this.idorder = idorder;
     }
     
 }

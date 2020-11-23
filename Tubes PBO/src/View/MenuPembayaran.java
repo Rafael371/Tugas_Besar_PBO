@@ -27,6 +27,7 @@ public class MenuPembayaran {
     private JLabel labelIsiNamaCust, labelIsiNamaTukang, labelIsiAlamat, labelIsiKategori, labelIsi, labelIsiJam, labelIsiDiskon, labelIsiTotalHarga;
     private JButton buttonSelesai;
     private int totalHarga;
+    private int tukarPoin=100;
     public MenuPembayaran(){
         frame = new JFrame("Payment");
         frame.setSize(400, 400);
@@ -71,6 +72,7 @@ public class MenuPembayaran {
                     labelIsiDiskon.setBounds(250, 220, 100, 20);
                     totalHarga = (PesananManager.getInstance().getPesanan().getJumlah() * 50000) + (PesananManager.getInstance().getPesanan().getLama() * 10000);
                     totalHarga = totalHarga - (totalHarga * (PesananManager.getInstance().getPesanan().getDiskon() / 100));
+                    
                     labelTotalHarga.setBounds(20, 250, 100, 20);
                     labelIsiTotalHarga = new JLabel("Rp. " + String.valueOf(totalHarga));
                     labelIsiTotalHarga.setBounds(250, 250, 100, 20);
@@ -104,12 +106,11 @@ public class MenuPembayaran {
                 }
                 break;
             case "Laundry":
-                //apa aja yang dikeluarin di frame (yang udah dikeluarin : menuPembayaran, namaCust, namaTukang, alamat, kategori)
                 labelRegular.setBounds(20, 160, 100, 20);
                 labelIsi = new JLabel(PesananManager.getInstance().getPesanan().getJumlah() + " kilo");
                 labelIsi.setBounds(250, 160, 100, 20);
                 
-                totalHarga = (PesananManager.getInstance().getPesanan().getJumlah() * 50000) + (PesananManager.getInstance().getPesanan().getLama() * 10000);
+                totalHarga = (PesananManager.getInstance().getPesanan().getJumlah() * 50000);
                 labelTotalHarga.setBounds(20, 250, 100, 20);
                 labelIsiTotalHarga = new JLabel("Rp. " + String.valueOf(totalHarga));
                 labelIsiTotalHarga.setBounds(250, 250, 100, 20);
@@ -119,13 +120,12 @@ public class MenuPembayaran {
                 frame.add(labelTotalHarga);
                 frame.add(labelIsiTotalHarga);
                 break;
-            case "Shoes and Care":
-                //apa aja yang dikeluarin di frame (yang udah dikeluarin : menuPembayaran, namaCust, namaTukang, alamat, kategori)
+            case "Shoes And Care":
                 labelRegular.setBounds(20, 160, 100, 20);
                 labelIsi = new JLabel(PesananManager.getInstance().getPesanan().getJumlah() + " pasang sepatu");
                 labelIsi.setBounds(250, 160, 100, 20);
                 
-                totalHarga = (PesananManager.getInstance().getPesanan().getJumlah() * 50000) + (PesananManager.getInstance().getPesanan().getLama() * 10000);
+                totalHarga = (PesananManager.getInstance().getPesanan().getJumlah() * 50000);
                 labelTotalHarga.setBounds(20, 250, 100, 20);
                 labelIsiTotalHarga = new JLabel("Rp. " + String.valueOf(totalHarga));
                 labelIsiTotalHarga.setBounds(250, 250, 100, 20);
@@ -140,19 +140,33 @@ public class MenuPembayaran {
         buttonSelesai = new JButton("Selesai");
         buttonSelesai.setBounds(150, 280, 100, 20);
         buttonSelesai.addActionListener(new ActionListener(){
+            @Override
             public void actionPerformed(ActionEvent e){
+                int banyakPoinUser=CustomerManager.getInstance().getCustomer().getPoinUser();
+                if(banyakPoinUser >= 100){
+                    int jawab = JOptionPane.showConfirmDialog(null, "ingin menggunakan poin? poin anda " + banyakPoinUser, "Tukar Poin", JOptionPane.YES_NO_OPTION);
+                    if(jawab == JOptionPane.YES_OPTION){
+                        CustomerManager.getInstance().getCustomer().setPoinUser(CustomerManager.getInstance().getCustomer().getPoinUser()-100);
+                        totalHarga=totalHarga*0;
+                    }
+                }
                 CustomerManager.getInstance().getCustomer().setSaldoUser(CustomerManager.getInstance().getCustomer().getSaldoUser() - totalHarga);
                 PesananManager.getInstance().getPesanan().setTotalHarga(totalHarga);
                 JOptionPane.showMessageDialog(null, "Saldo Anda Telah Dipotong!!\nTerima Kasih Telah Menggunakan Jasa Kami!!");
                 CustomerManager.getInstance().getCustomer().setPoinUser(CustomerManager.getInstance().getCustomer().getPoinUser() + 1);
                 TukangManager.getInstance().getTukang().setStatus("Ready");
-                TukangManager.getInstance().getTukang().setSaldo(TukangManager.getInstance().getTukang().getSaldo() + (totalHarga-(totalHarga*(1/10))));
+                double totalPendapatan = TukangManager.getInstance().getTukang().getSaldo()+(totalHarga-(totalHarga*0.1));
+                double pendapatanAdmin = totalHarga*0.1;
+                DatabaseControl.updateSaldoAdmin(pendapatanAdmin);
+                //System.out.println(totalPendapatan);
+                TukangManager.getInstance().getTukang().setSaldo(totalPendapatan);
                 
                 DatabaseControl.InsertNewPesanan(PesananManager.getInstance().getPesanan());
                 frame.setVisible(false);
                 DatabaseControl.updateTukang(TukangManager.getInstance().getTukang());
                 new MenuCustomer();
             }
+
         });
         frame.add(labelMenuPembayaran);
         frame.add(labelNamaCust);
