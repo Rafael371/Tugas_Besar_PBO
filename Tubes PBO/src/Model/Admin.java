@@ -14,7 +14,23 @@ import java.util.ArrayList;
  * @author HP
  */
 public class Admin extends Person{
+    private int idAdmin;
+    private double saldo;
+    public int getIdAdmin() {
+        return idAdmin;
+    }
 
+    public void setIdAdmin(int idAdmin) {
+        this.idAdmin = idAdmin;
+    }
+    
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
     @Override
     public boolean login(String username, String password) {
         ArrayList<Admin> allAdmin = DatabaseControl.getAllAdmin();

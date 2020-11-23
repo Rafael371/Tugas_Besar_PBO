@@ -26,7 +26,7 @@ import javax.swing.WindowConstants;
  */
 public class Laundry extends JFrame {
     JFrame frame;
-    JLabel labelRegular, labelTanggal, labelJam;
+    JLabel labelRegular, labelTanggal, labelJam,labelbasabasi;
     JButton buttonPesan, buttonBack, buttonLogout;
     JTextField tfRegular;
     
@@ -40,6 +40,8 @@ public class Laundry extends JFrame {
         labelRegular = new JLabel("Regular");
         labelRegular.setBounds(50, 60, 100, 30);
         labelRegular.setFont(new Font(labelRegular.getFont().getName(), labelRegular.getFont().getStyle(), 18));
+        labelbasabasi = new JLabel("Kilo = ");
+        labelbasabasi.setBounds(20, 120, 50, 30);
         labelTanggal = new JLabel(getTanggal());
         labelTanggal.setBounds(5, 10, 100, 30);
         labelTanggal.setFont(new Font(labelTanggal.getFont().getName(), labelTanggal.getFont().getStyle(), 18));
@@ -48,7 +50,7 @@ public class Laundry extends JFrame {
         labelJam.setFont(new Font(labelJam.getFont().getName(), labelJam.getFont().getStyle(), 18));
         
         tfRegular = new JTextField();
-        tfRegular.setBounds(50, 120, 100, 20);
+        tfRegular.setBounds(70, 125, 100, 20);
         buttonPesan = new JButton("Pesan");
         buttonPesan.setBounds(58, 200, 80, 20);
         buttonPesan.addActionListener(new ActionListener(){
@@ -93,6 +95,7 @@ public class Laundry extends JFrame {
         });
         Garis garis = new Garis();
         
+        frame.add(labelbasabasi);
         frame.add(buttonPesan);
         frame.add(buttonBack);
         frame.add(buttonLogout);

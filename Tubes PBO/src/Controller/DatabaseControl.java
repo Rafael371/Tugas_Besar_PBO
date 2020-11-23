@@ -46,19 +46,18 @@ public class DatabaseControl {
     public static boolean InsertNewTukang(Tukang tukang){
         conn.connect();
         
-        String query = "INSERT INTO tukang (id_tukang, username, password, nama, ratting, email, no_telp, kategori, status, saldo) VALUES(?,?,?,?,?,?,?,?,?,?)";
+        String query = "INSERT INTO tukang (id_tukang, username, password, nama, email, no_telp, kategori, status, saldo) VALUES(?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement stmt = conn.con.prepareStatement(query);
             stmt.setInt(1, 0);
             stmt.setString(2, tukang.getUsername());
             stmt.setString(3, tukang.getPassword());
             stmt.setString(4, tukang.getNama());
-            stmt.setFloat(5, tukang.getReview());
-            stmt.setString(6, tukang.getEmail());
-            stmt.setString(7, tukang.getNoTelp());
-            stmt.setString(8, tukang.getKategori());
-            stmt.setString(9, tukang.getStatus());
-            stmt.setInt(10, 0);
+            stmt.setString(5, tukang.getEmail());
+            stmt.setString(6, tukang.getNoTelp());
+            stmt.setString(7, tukang.getKategori());
+            stmt.setString(8, tukang.getStatus());
+            stmt.setInt(9, 0);
             
             stmt.executeUpdate();
             return (true);
@@ -103,7 +102,6 @@ public class DatabaseControl {
                 tukang.setIdTukang(rs.getInt("id_tukang"));
                 tukang.setUsername(rs.getString("username"));
                 tukang.setPassword(rs.getString("password"));
-                tukang.setReview(rs.getInt("ratting"));
                 tukang.setNama(rs.getString("nama"));
                 tukang.setEmail(rs.getString("email"));
                 tukang.setNoTelp(rs.getString("no_telp"));
@@ -131,6 +129,7 @@ public class DatabaseControl {
                 admin.setNama(rs.getString("nama"));
                 admin.setEmail(rs.getString("email"));
                 admin.setNoTelp(rs.getString("no_telp"));
+                admin.setSaldo(rs.getDouble("saldo"));
                 
                 allAdmin.add(admin);
             }
@@ -139,10 +138,30 @@ public class DatabaseControl {
         }
         return (allAdmin);
     }
+    
+    public static ArrayList<Pesanan> getPesanan(int idTukang){
+        ArrayList<Pesanan> listPesanan = new ArrayList<>();
+        conn.connect();
+        String query = "SELECT pesanan.*,users.nama FROM pesanan JOIN users ON pesanan.id_user = users.id_user WHERE id_tukang = "+idTukang+" and status = 'REQUESTED'";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                Pesanan pesanan = new Pesanan();
+                pesanan.setIdorder(rs.getInt("id_order"));
+                pesanan.setAlamat(rs.getString("alamat"));
+                pesanan.setNamaPemesan(rs.getString("users.nama"));
+                listPesanan.add(pesanan);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (listPesanan);
+    }
     public static boolean InsertNewPesanan(Pesanan pesanan){
         conn.connect();
         
-        String query = "INSERT INTO pesanan (id_order, id_user, id_tukang, alamat, kategori, paket, regular, lama, jumlah, total_harga) VALUES(?,?,?,?,?,?,?,?,?,?)";
+        String query = "INSERT INTO pesanan (id_order, id_user, id_tukang, alamat, kategori, paket, regular, lama, jumlah, total_harga, status) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement stmt = conn.con.prepareStatement(query);
             stmt.setInt(1, 0);
@@ -160,6 +179,7 @@ public class DatabaseControl {
             stmt.setInt(8, pesanan.getLama());
             stmt.setInt(9, pesanan.getJumlah());
             stmt.setInt(10, pesanan.getTotalHarga());
+            stmt.setString(11, "REQUESTED");
             
             stmt.executeUpdate();
             return (true);
@@ -194,7 +214,7 @@ public class DatabaseControl {
                 + "nama='" + tukang.getNama() + "', "
                 + "email='" + tukang.getEmail() + "', "
                 + "no_telp='" + tukang.getNoTelp() + "', "
-                + "kategori'=" + tukang.getKategori() + "', "
+                + "kategori='" + tukang.getKategori() + "', "
                 + "status='" + tukang.getStatus() + "', "
                 + "saldo=" + tukang.getSaldo()
                 + " WHERE id_tukang=" + tukang.getIdTukang();
@@ -207,4 +227,116 @@ public class DatabaseControl {
             return (false);
         }
     }
+    public static boolean updatePesananTukang(int idOrder) {
+        conn.connect();
+        String query = "UPDATE pesanan SET status = 'DONE' WHERE id_order = '" + idOrder+"'";
+        try {
+            Statement stmt = conn.con.createStatement();
+            stmt.executeUpdate(query);
+            return (true);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return (false);
+        }
+    }
+    public static boolean updateAdmin(Admin admin) {
+        conn.connect();
+        String query = "UPDATE users SET username='" + admin.getUsername() + "', "
+                + "password='" + admin.getPassword() + "', "
+                + "nama='" + admin.getNama() + "', "
+                + "email='" + admin.getEmail() + "', "
+                + "no_telp='" + admin.getNoTelp() + "', "
+                + "saldo_user=" + admin.getSaldo()
+                + " WHERE id_user=" + admin.getIdAdmin();
+        try {
+            Statement stmt = conn.con.createStatement();
+            stmt.executeUpdate(query);
+            return (true);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return (false);
+        }
+    }
+
+    public static boolean updateAcceptTukang(int id_Tukang) {
+        conn.connect();
+        String query = "UPDATE tukang SET status = 'Ready' WHERE id_tukang = " + id_Tukang;
+        try {
+            Statement stmt = conn.con.createStatement();
+            stmt.executeUpdate(query);
+            return (true);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return (false);
+        }
+    }
+
+    public static ArrayList<Tukang> getReadyTukang() {
+        ArrayList<Tukang> listTukang = new ArrayList<>();
+        conn.connect();
+        String query = "SELECT * FROM tukang WHERE status ='Ready'";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                Tukang tukang = new Tukang();
+                tukang.setNama(rs.getString("nama"));
+                tukang.setIdTukang(rs.getInt("id_tukang"));
+                tukang.setNoTelp(rs.getString("no_telp"));
+                tukang.setKategori(rs.getString("kategori"));
+                listTukang.add(tukang);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (listTukang);
+    }
+
+    public static boolean updateBlockTukang(int id_Tukang) {
+        conn.connect();
+        String query = "UPDATE tukang SET status = 'Blocked' WHERE id_tukang = " + id_Tukang;
+        try {
+            Statement stmt = conn.con.createStatement();
+            stmt.executeUpdate(query);
+            return (true);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return (false);
+        }
+    }
+
+    public static ArrayList<Tukang> getReqTukang() {
+        ArrayList<Tukang> listTukang = new ArrayList<>();
+        conn.connect();
+        String query = "SELECT * FROM tukang WHERE status = 'Requested'";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                Tukang tukang = new Tukang();
+                tukang.setNama(rs.getString("nama"));
+                tukang.setIdTukang(rs.getInt("id_tukang"));
+                tukang.setNoTelp(rs.getString("no_telp"));
+                tukang.setKategori(rs.getString("kategori"));
+                listTukang.add(tukang);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (listTukang);
+    }
+
+    public static boolean updateSaldoAdmin(double pendapatanAdmin) {
+        conn.connect();
+        ArrayList<Admin> admin = getAllAdmin();
+        double saldoSementara=admin.get(0).getSaldo();
+        String query = "UPDATE admin SET saldo = " + (pendapatanAdmin+saldoSementara) + "WHERE id_admin = '1'";
+        try {
+            Statement stmt = conn.con.createStatement();
+            stmt.executeUpdate(query);
+            return (true);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return (false);
+        }}
 }

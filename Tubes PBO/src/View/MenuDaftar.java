@@ -110,7 +110,6 @@ public class MenuDaftar extends JFrame{
                     tukang.setEmail(tfEmail.getText());
                     tukang.setNoTelp(tfNoTelp.getText());
                     tukang.setStatus("Requested");
-                    tukang.setReview(0);
                     tukang.setSaldo(0);
                     if(radioShoes.isSelected()){
                         tukang.setKategori(radioShoes.getText());
@@ -143,14 +142,14 @@ public class MenuDaftar extends JFrame{
         radioTukang.setBounds(300, 165, 150, 35);
         radioTukang.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                radioShoes = new JRadioButton("Shoes and Care");
+                radioShoes = new JRadioButton("Shoes And Care");
                 radioLaundry = new JRadioButton("Laundry");
                 radioHomeCleaning = new JRadioButton("Home Cleaning");
                 radioShoes.setBounds(70, 190, 150, 35);
                 radioLaundry.setBounds(270, 190, 150, 35);
                 radioHomeCleaning.setBounds(470, 190, 150, 35);
                 buttonDaftar.setBounds(50, 240, 80, 30);
-               buttonBackToMainMenu.setBounds(200,240,100,30);
+                buttonBackToMainMenu.setBounds(200,240,100,30);
                 bg2 = new ButtonGroup();
                 bg2.add(radioShoes);
                 bg2.add(radioLaundry);

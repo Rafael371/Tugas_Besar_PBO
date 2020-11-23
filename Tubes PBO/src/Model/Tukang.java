@@ -17,8 +17,7 @@ import java.util.ArrayList;
 public class Tukang extends PersonSelainAdmin{
     private String status;
     private String kategori;
-    private float review;
-    private int saldo;
+    private double saldo;
     private int idTukang;
     
     public int getIdTukang(){
@@ -41,19 +40,11 @@ public class Tukang extends PersonSelainAdmin{
         this.status = status;
     }
 
-    public float getReview() {
-        return review;
-    }
-
-    public void setReview(float review) {
-        this.review = review;
-    }
-
-    public int getSaldo() {
+    public double getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(int saldo) {
+    public void setSaldo(double saldo) {
         this.saldo = saldo;
     }
 
