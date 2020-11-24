@@ -35,7 +35,7 @@ public class MenuTukang extends JFrame{
         labelWelcome.setBounds(50, 10, 150, 50);
         
         buttonPesananCustomer = new JButton("Mari Kerja");
-        buttonPesananCustomer.setBounds(90, 90, 200, 30);
+        buttonPesananCustomer.setBounds(90, 120, 200, 30);
         buttonPesananCustomer.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 frame.setVisible(false);
@@ -47,7 +47,7 @@ public class MenuTukang extends JFrame{
         buttonKeuangan.setBounds(90, 170, 200, 30);
         buttonKeuangan.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                JOptionPane.showMessageDialog(null, "Keuangan Anda adalah " + TukangManager.getInstance().getTukang().getSaldo());
+                JOptionPane.showMessageDialog(null, "Keuangan Anda adalah Rp. " + TukangManager.getInstance().getTukang().getSaldo());
             }
         });
         buttonLogout = new JButton("Logout");

@@ -58,7 +58,7 @@ public class Tukang extends PersonSelainAdmin{
         ArrayList<Tukang> allTukang = DatabaseControl.getAllTukang();
         boolean cek = false;
         for(int i = 0; (i < allTukang.size()) && (!cek); i++){
-            if(allTukang.get(i).getUsername().equals(username) && allTukang.get(i).getPassword().equals(password)){
+            if(allTukang.get(i).getUsername().equals(username) && allTukang.get(i).getPassword().equals(password) && allTukang.get(i).getStatus().equals("Ready")){
                 cek = true;
                 TukangManager.getInstance().setTukang(allTukang.get(i));
             }

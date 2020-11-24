@@ -67,11 +67,11 @@ public class PesananCustomer extends JFrame {
         panel.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
 
         button_acc = new JButton("Accept");
-        button_acc.setPreferredSize(new Dimension(getWidth() - 100, 30));
+        button_acc.setPreferredSize(new Dimension(150, 30));
         button_acc.addActionListener(action);
         panel.add(button_acc);
         buttonBack = new JButton("Back");
-        buttonBack.setPreferredSize(new Dimension(getWidth() - 100, 30));
+        buttonBack.setPreferredSize(new Dimension(150, 30));
         buttonBack.addActionListener(action);
         panel.add(buttonBack);
         
@@ -108,6 +108,7 @@ public class PesananCustomer extends JFrame {
                     }
                     break;
                 case"Back":
+                    setVisible(false);
                     new MenuTukang();
                 default:
                     break;
