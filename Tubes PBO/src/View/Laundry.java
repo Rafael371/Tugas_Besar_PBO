@@ -26,7 +26,7 @@ import javax.swing.WindowConstants;
  */
 public class Laundry extends JFrame {
     JFrame frame;
-    JLabel labelRegular, labelTanggal, labelJam,labelbasabasi;
+    JLabel labelRegular, labelTanggal, labelJam, labelPaket, labelbasabasi;
     JButton buttonPesan, buttonBack, buttonLogout;
     JTextField tfRegular;
     
@@ -36,7 +36,9 @@ public class Laundry extends JFrame {
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
        
-        
+        labelPaket = new JLabel("Paket");
+        labelPaket.setBounds(260, 60, 100, 30);
+        labelPaket.setFont(new Font(labelPaket.getFont().getName(), labelPaket.getFont().getStyle(), 18));
         labelRegular = new JLabel("Regular");
         labelRegular.setBounds(50, 60, 100, 30);
         labelRegular.setFont(new Font(labelRegular.getFont().getName(), labelRegular.getFont().getStyle(), 18));
@@ -96,6 +98,7 @@ public class Laundry extends JFrame {
         Garis garis = new Garis();
         
         frame.add(labelbasabasi);
+        frame.add(labelPaket);
         frame.add(buttonPesan);
         frame.add(buttonBack);
         frame.add(buttonLogout);

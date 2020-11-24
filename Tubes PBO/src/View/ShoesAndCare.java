@@ -26,20 +26,24 @@ import javax.swing.WindowConstants;
  */
 public class ShoesAndCare extends JFrame{
     JFrame frame;
-    JLabel labelRegular, labelTanggal, labelJam;
+    JLabel labelRegular, labelTanggal, labelJam, labelPaket, labelBasaBasi;
     JButton buttonPesan, buttonBack, buttonLogout;
     JTextField tfRegular;
     
     public ShoesAndCare() {
-        frame = new JFrame("Home Cleaning");
+        frame = new JFrame("Shoes And Care");
         frame.setSize(400, 400);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-       
         
+        labelPaket = new JLabel("Paket");
+        labelPaket.setBounds(260, 60, 100, 30);
+        labelPaket.setFont(new Font(labelPaket.getFont().getName(), labelPaket.getFont().getStyle(), 18));
         labelRegular = new JLabel("Regular");
         labelRegular.setBounds(50, 60, 100, 30);
         labelRegular.setFont(new Font(labelRegular.getFont().getName(), labelRegular.getFont().getStyle(), 18));
+        labelBasaBasi = new JLabel("Banyak Pasang Sepatu = ");
+        labelBasaBasi.setBounds(30, 110, 300, 30);
         labelTanggal = new JLabel(getTanggal());
         labelTanggal.setBounds(5, 10, 100, 30);
         labelTanggal.setFont(new Font(labelTanggal.getFont().getName(), labelTanggal.getFont().getStyle(), 18));
@@ -48,7 +52,7 @@ public class ShoesAndCare extends JFrame{
         labelJam.setFont(new Font(labelJam.getFont().getName(), labelJam.getFont().getStyle(), 18));
         
         tfRegular = new JTextField();
-        tfRegular.setBounds(50, 120, 100, 20);
+        tfRegular.setBounds(50, 140, 100, 20);
         buttonPesan = new JButton("Pesan");
         buttonPesan.setBounds(58, 200, 80, 20);
         buttonPesan.addActionListener(new ActionListener(){
@@ -94,10 +98,12 @@ public class ShoesAndCare extends JFrame{
         Garis garis = new Garis();
         
         frame.add(buttonPesan);
+        frame.add(labelPaket);
         frame.add(buttonBack);
         frame.add(buttonLogout);
         frame.add(tfRegular);
         frame.add(labelRegular);
+        frame.add(labelBasaBasi);
         frame.add(labelTanggal);
         frame.add(labelJam);
         frame.add(garis);
