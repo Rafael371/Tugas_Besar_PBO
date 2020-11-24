@@ -36,8 +36,7 @@ public class LaundryFinder {
             JOptionPane.showMessageDialog(null, "Tukang ditemukan!!");
             JOptionPane.showMessageDialog(null, "Nama : " + TukangManager.getInstance().getTukang().getNama() + "\nKategori : " + TukangManager.getInstance().getTukang().getKategori());
             PesananManager.getInstance().getPesanan().setKategori("Laundry");
-            TukangManager.getInstance().getTukang().setStatus("Not Available");
-            new MenuPembayaran();
+             new MenuPembayaran();
         }
     }
     
