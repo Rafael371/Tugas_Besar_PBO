@@ -110,7 +110,7 @@ public class MenuPembayaran {
                 labelIsi = new JLabel(PesananManager.getInstance().getPesanan().getJumlah() + " kilo");
                 labelIsi.setBounds(250, 160, 100, 20);
                 
-                totalHarga = (PesananManager.getInstance().getPesanan().getJumlah() * 50000);
+                totalHarga = (PesananManager.getInstance().getPesanan().getJumlah() * 10000);
                 labelTotalHarga.setBounds(20, 250, 100, 20);
                 labelIsiTotalHarga = new JLabel("Rp. " + String.valueOf(totalHarga));
                 labelIsiTotalHarga.setBounds(250, 250, 100, 20);
@@ -125,7 +125,7 @@ public class MenuPembayaran {
                 labelIsi = new JLabel(PesananManager.getInstance().getPesanan().getJumlah() + " pasang sepatu");
                 labelIsi.setBounds(250, 160, 100, 20);
                 
-                totalHarga = (PesananManager.getInstance().getPesanan().getJumlah() * 50000);
+                totalHarga = (PesananManager.getInstance().getPesanan().getJumlah() * 45000);
                 labelTotalHarga.setBounds(20, 250, 100, 20);
                 labelIsiTotalHarga = new JLabel("Rp. " + String.valueOf(totalHarga));
                 labelIsiTotalHarga.setBounds(250, 250, 100, 20);

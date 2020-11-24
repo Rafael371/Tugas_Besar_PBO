@@ -53,7 +53,7 @@ public class MenuAdmin extends JFrame{
         buttonKeuangan.setBounds(90, 170, 200, 30);
         buttonKeuangan.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                JOptionPane.showMessageDialog(null, "Keuangan Perusahaan adalah " + AdminManager.getInstance().getAdmin().getSaldo());
+                JOptionPane.showMessageDialog(null, "Keuangan Perusahaan adalah Rp. " + AdminManager.getInstance().getAdmin().getSaldo());
             }
         });
         buttonLogout = new JButton("Logout");
