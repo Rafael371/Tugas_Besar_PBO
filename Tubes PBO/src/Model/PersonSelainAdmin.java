@@ -18,5 +18,4 @@ import java.util.ArrayList;
 public abstract class PersonSelainAdmin extends Person{
     
     public abstract void register();
-    public abstract boolean login(String username, String password);
 }
