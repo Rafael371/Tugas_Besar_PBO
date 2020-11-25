@@ -109,7 +109,7 @@ public class HomeCleaning{
                 
                 new HomeCleaningFinder();
             }
-        });
+        });  
         buttonPaket3 = new JButton("Paket 10 Ruangan");
         buttonPaket3.setBounds(225, 200, 150, 30);
         buttonPaket3.addActionListener(new ActionListener(){

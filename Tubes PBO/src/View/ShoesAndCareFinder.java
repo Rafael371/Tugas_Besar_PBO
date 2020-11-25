@@ -36,7 +36,6 @@ public class ShoesAndCareFinder {
             JOptionPane.showMessageDialog(null, "Tukang ditemukan!!");
             JOptionPane.showMessageDialog(null, "Nama : " + TukangManager.getInstance().getTukang().getNama() + "\nKategori : " + TukangManager.getInstance().getTukang().getKategori());
             PesananManager.getInstance().getPesanan().setKategori("Shoes And Care");
-            TukangManager.getInstance().getTukang().setStatus("Not Available");
             new MenuPembayaran();
         }
         
