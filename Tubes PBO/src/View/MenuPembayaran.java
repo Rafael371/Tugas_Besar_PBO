@@ -155,8 +155,8 @@ public class MenuPembayaran {
                 JOptionPane.showMessageDialog(null, "Saldo Anda Telah Dipotong!!\nTerima Kasih Telah Menggunakan Jasa Kami!!");
                 CustomerManager.getInstance().getCustomer().setPoinUser(CustomerManager.getInstance().getCustomer().getPoinUser() + 1);
                 TukangManager.getInstance().getTukang().setStatus("Ready");
-                double totalPendapatan = TukangManager.getInstance().getTukang().getSaldo()+(totalHarga-(totalHarga*0.1));
-                double pendapatanAdmin = totalHarga*0.1;
+                double totalPendapatan = TukangManager.getInstance().getTukang().getSaldo()+(totalHarga-(totalHarga*0.3));
+                double pendapatanAdmin = totalHarga*0.3;
                 DatabaseControl.updateSaldoAdmin(pendapatanAdmin);
                 //System.out.println(totalPendapatan);
                 TukangManager.getInstance().getTukang().setSaldo(totalPendapatan);
