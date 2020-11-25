@@ -10,5 +10,5 @@ package Controller;
  * @author HP
  */
 public interface Interface {
-    final static String unameAdmin="admin"; 
+    final static String unameAdmin=AdminManager.getInstance().getAdmin().getPassword(); 
 }

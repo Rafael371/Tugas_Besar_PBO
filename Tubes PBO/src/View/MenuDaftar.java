@@ -36,7 +36,7 @@ public class MenuDaftar extends JFrame {
 
     public MenuDaftar() {
         frame = new JFrame("Daftar User");
-        frame.setSize(1000, 600);
+        frame.setSize(740, 350);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 

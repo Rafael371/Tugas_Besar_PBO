@@ -108,6 +108,8 @@ public class BlockTukang extends JFrame{
                                 setVisible(false);
                                 new MenuAdmin();
                             }
+                        }else{
+                            JOptionPane.showMessageDialog(null, "Password Salah", "ERROR", JOptionPane.ERROR_MESSAGE);
                         }
                     }
                     break;
