@@ -1,2 +1,2 @@
 Pemenuhan Tugas Besar PBO <br>
-Using Java for accpeting user order for cleaning company
+Using Java for accepting user order for cleaning company
